@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Persistence.Contexts
 {
@@ -26,6 +27,11 @@ namespace Persistence.Contexts
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedAt = DateTime.Now;
+                }
+                else if(entry.State == EntityState.Deleted && entry is IDeleteEntity)
+                {
+                    IDeleteEntity entity = (IDeleteEntity)entry;
+                    entity.DeletedAt = DateTime.Now;
                 }
                 else
                 {
