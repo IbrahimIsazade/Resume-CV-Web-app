@@ -17,6 +17,7 @@ namespace Persistence.Contexts
         }
 
         public DbSet<Service> Services { get; set; }
+        public DbSet<ContactPost> ContactPosts { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

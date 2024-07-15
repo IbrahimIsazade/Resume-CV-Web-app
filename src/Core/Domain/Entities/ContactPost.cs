@@ -15,7 +15,7 @@ namespace Domain.Entities
         public required string Content { get; set; }
         public required DateTime CreatedAt { get; set; }
         public DateTime AnsweredAt { get; set; }
-        public DateTime AnsweredBy { get; set; }
+        public int AnsweredBy { get; set; }
         public string? Answer { get; set; }
     }
 }
