@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Contexts
@@ -14,6 +15,8 @@ namespace Persistence.Contexts
 
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
+
+        public DbSet<Service> Services { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

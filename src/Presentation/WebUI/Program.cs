@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace WebUI
 {
     public class Program
@@ -8,6 +10,13 @@ namespace WebUI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<DbContext>(cfg =>
+            {
+                cfg.UseSqlServer(builder.Configuration.GetConnectionString("cString"), opt =>
+                {
+                    opt.MigrationsHistoryTable("MigrationHistory");
+                });
+            });
 
             var app = builder.Build();
 
