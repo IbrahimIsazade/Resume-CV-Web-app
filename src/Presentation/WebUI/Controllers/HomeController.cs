@@ -16,9 +16,15 @@ namespace WebUI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult EditResume()
         {
             return View();
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> EditResume()
+        //{
+        //    return View();
+        //}
     }
 }

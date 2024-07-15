@@ -8,6 +8,8 @@ namespace WebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Host.UseServiceProviderFactory(new IoCFactory());
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<DbContext>(cfg =>
