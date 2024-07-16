@@ -28,11 +28,6 @@ namespace Persistence.Contexts
                 {
                     entry.Entity.CreatedAt = DateTime.Now;
                 }
-                else if(entry.State == EntityState.Deleted && entry is IDeleteEntity)
-                {
-                    IDeleteEntity entity = (IDeleteEntity)entry;
-                    entity.DeletedAt = DateTime.Now;
-                }
                 else
                 {
                     entry.Property(m => m.CreatedAt).IsModified = false;

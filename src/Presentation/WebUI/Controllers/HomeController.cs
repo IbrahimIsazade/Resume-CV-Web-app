@@ -1,14 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
+using Services.ContactPost;
 
 namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IContactPostService contactPostService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IContactPostService contactPostService)
         {
-            _logger = logger;
+            this.contactPostService = contactPostService;
         }
 
         public IActionResult Index()
@@ -16,10 +17,25 @@ namespace WebUI.Controllers
             return View();
         }
 
-        public IActionResult EditResume()
+        [HttpPost]
+        public async Task<IActionResult> Index(AddContactPostRequestDto model)
         {
-            return View();
+            try
+            {
+                await contactPostService.Add(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
         }
+
+        //public IActionResult EditResume()
+        //{
+        //    return View();
+        //}
 
         //[HttpPost]
         //public async Task<IActionResult> EditResume()

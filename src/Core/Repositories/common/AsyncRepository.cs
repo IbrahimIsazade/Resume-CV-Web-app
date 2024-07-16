@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Repositories.common
@@ -14,6 +15,13 @@ namespace Repositories.common
         public void Delete(T entry)
         {
             db.Entry(entry).State = EntityState.Deleted;
+
+            if(db.Entry(entry) is IDeleteEntity)
+            {
+                db.Entry(entry).State = EntityState.Modified;
+                var entity = (IDeleteEntity)db.Entry(entry);
+                entity.DeletedAt = DateTime.Now;
+            }
         }
 
         public void Edit(T entry)

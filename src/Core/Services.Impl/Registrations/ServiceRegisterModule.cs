@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Services.Impl.Registrations
 {
-    class ServiceRegisterModule : Autofac.Module
+    public class ServiceRegisterModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {

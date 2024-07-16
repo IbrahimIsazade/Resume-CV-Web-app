@@ -8,7 +8,5 @@ namespace Persistence.Repositories
     class ServicesRepository : AsyncRepository<Service>, IServicesRepository
     {
         public ServicesRepository(DbContext db) : base(db) { }
-
-        //
     }
 }
