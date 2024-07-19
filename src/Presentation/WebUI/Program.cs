@@ -1,4 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Services;
 
 namespace WebUI
 {
@@ -19,6 +22,12 @@ namespace WebUI
                     opt.MigrationsHistoryTable("MigrationHistory");
                 });
             });
+
+            builder.Services.AddFluentValidationAutoValidation(cfg =>
+            {
+                cfg.DisableDataAnnotationsValidation = false;
+            });
+            builder.Services.AddValidatorsFromAssemblyContaining<IServiceReferance>(includeInternalTypes: true);
 
             var app = builder.Build();
 

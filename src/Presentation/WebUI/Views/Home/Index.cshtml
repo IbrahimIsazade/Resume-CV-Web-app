@@ -822,27 +822,31 @@
                                                 <div id="contact_message_1" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
 
                                                 <!-- FORM -->
-                                                <form role="form" id="contact_form_1" class="contact-form" method="post" onSubmit="return false">
+                                                <form method="post" role="form" id="frm'" class="contact-form" onSubmit="return false">
                                                     <ul class="row">
                                                         <li class="col-sm-4">
                                                             <label>
                                                                 <input type="text" class="form-control" name="name" id="name_1" placeholder="NAME">
                                                             </label>
+                                                           <span asp-validation-for="FullName"></span>
                                                         </li>
                                                         <li class="col-sm-4">
                                                             <label>
                                                                 <input type="text" class="form-control" name="email" id="email_1" placeholder="EMAIL">
                                                             </label>
+                                                           <span asp-validation-for="Email"></span>
                                                         </li>
                                                         <li class="col-sm-4">
                                                             <label>
                                                                 <input type="text" class="form-control" name="company" id="company_1" placeholder="SUBJECT">
                                                             </label>
+                                                           <span asp-validation-for="Subject"></span>
                                                         </li>
                                                         <li class="col-sm-12">
                                                             <label>
                                                                 <textarea class="form-control" name="message" id="message_1" rows="5" placeholder="CONTENT..."></textarea>
                                                             </label>
+                                                           <span asp-validation-for="Content"></span>
                                                         </li>
                                                         <li class="col-sm-12">
                                                             <button type="submit" value="submit" id="btn_submit_1" onClick="proceed();">SEND ME</button>
@@ -864,6 +868,7 @@
 
 @section addjs {
     <script>
+
         const form = document.querySelector('#frm');
 
         form.addEventListener('submit', function (e) {
@@ -880,38 +885,30 @@
 
                 }
             })
-                .then(response => response.json())
-                .then(response => {
+            .then(res => res.json())
+            .then(res => {
 
-                    if (response.error == false) {
-                        iziToast.show({
-                            title: 'Success',
-                            message: response.message,
-                            timeout: 5000,
-                            position: 'bottomRight',
-                            theme: 'light',
-                            color: 'green'
-                        });
-                        element.reset();
-                        return;
-                    }
-                    else {
-                        iziToast.show({
-                            title: 'Error',
-                            message: response.message,
-                            timeout: 5000,
-                            position: 'bottomRight',
-                            theme: 'light',
-                            color: 'red'
-                        });
-                    }
+                if (res.error == false) {
+                    iziToast.success({
+                        title: 'Success',
+                        message: res.message,
+                        timeout: 5000,
+                        position: 'bottomRight'
+                    });
+                    element.reset();
+                    return;
+                }
 
-                    // console.log(response);
-                })
-                .catch(e => {
-                    console.error(e);
+                iziToast.error({
+                    title: 'Error',
+                    message: res.message,
+                    timeout: 5000,
+                    position: 'bottomRight'
                 });
-
+            })
+            .catch(e => {
+                console.error(e);
+            });
         });
     </script>
 }

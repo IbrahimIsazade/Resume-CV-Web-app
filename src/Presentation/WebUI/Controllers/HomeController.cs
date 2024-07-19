@@ -14,6 +14,19 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(AddContactPostRequestDto model)
         {
+            //if (!ModelState.IsValid)
+            //{
+            //    Console.WriteLine("Returning view");
+            //    return View(model);
+
+            //    return Json(new
+            //    {
+            //        error = true,
+            //        message = ModelState.ValidationState.ToString()
+            //    });
+            //}
+            //return View();
+
             var res = await contactPostService.Add(model);
 
             if (res.Error)
@@ -29,16 +42,5 @@ namespace WebUI.Controllers
                 message = res.Message
             });
         }
-
-        //public IActionResult EditResume()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> EditResume()
-        //{
-        //    return View();
-        //}
     }
 }

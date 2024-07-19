@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240719162643_SkillType_Services")]
+    partial class SkillType_Services
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,10 +89,10 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
-                    b.Property<DateTime?>("DeletedAt")
+                    b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("DeletedBy")
+                    b.Property<int>("DeletedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -99,7 +102,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("LastModifiedBy")
+                    b.Property<int>("LastModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -109,47 +112,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Services", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.SkillGroup", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("DeletedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifiedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("LastModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("SkillGroups", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.SkillType", b =>
@@ -166,16 +128,16 @@ namespace Persistence.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DeletedAt")
+                    b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("DeletedBy")
+                    b.Property<int>("DeletedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("LastModifiedBy")
+                    b.Property<int>("LastModifiedBy")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -186,15 +148,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SkillTypes", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.SkillGroup", b =>
-                {
-                    b.HasOne("Domain.Entities.SkillType", null)
-                        .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
