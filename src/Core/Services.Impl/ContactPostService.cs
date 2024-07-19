@@ -8,8 +8,6 @@ namespace Services.Impl
     {
         public async Task<AddContactPostResponseDto> Add(AddContactPostRequestDto model)
         {
-            if (model == null)
-                throw new ArgumentNullException(nameof(model));
 
             var post = new Domain.Entities.ContactPost
             {
@@ -20,10 +18,17 @@ namespace Services.Impl
                 CreatedAt = DateTime.Now,
             };
 
-            await contactPostRepository.AddAsync(post);
-            await contactPostRepository.SaveAsync();
+            try
+            {
+                await contactPostRepository.AddAsync(post);
+                await contactPostRepository.SaveAsync();
+            }
+            catch
+            {
+                return new AddContactPostResponseDto { Error = true, Message = "Your message hasn't been sent" };
+            }
 
-            return new AddContactPostResponseDto { FullName = post.FullName };
+            return new AddContactPostResponseDto { Error = false, Message = "Your message has been sent" };
         }
     }
 }

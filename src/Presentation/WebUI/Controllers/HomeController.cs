@@ -3,14 +3,8 @@ using Services.ContactPost;
 
 namespace WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IContactPostService contactPostService) : Controller
     {
-        private readonly IContactPostService contactPostService;
-
-        public HomeController(IContactPostService contactPostService)
-        {
-            this.contactPostService = contactPostService;
-        }
 
         public IActionResult Index()
         {
@@ -20,16 +14,20 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(AddContactPostRequestDto model)
         {
-            try
-            {
-                await contactPostService.Add(model);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index");
-            }
+            var res = await contactPostService.Add(model);
 
-            return RedirectToAction("Index");
+            if (res.Error)
+                return Json(new
+                {
+                    error = res.Error,
+                    message = res.Message
+                });
+
+            return Json(new
+            {
+                error = res.Error,
+                message = res.Message
+            });
         }
 
         //public IActionResult EditResume()

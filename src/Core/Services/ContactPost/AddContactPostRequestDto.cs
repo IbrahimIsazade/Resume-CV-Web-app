@@ -8,7 +8,8 @@ namespace Services.ContactPost
 {
     public class AddContactPostResponseDto
     {
-        public required string FullName { get; set; }
+        public required bool Error { get; set; }
+        public required string Message { get; set; }
     }
     public class AddContactPostRequestDto
     {
