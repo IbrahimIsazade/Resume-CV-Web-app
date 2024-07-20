@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.ContactPost
 {
-    class AddContactPostRequestDtoValidator : AbstractValidator<AddContactPostRequestDto>
+    public class AddContactPostRequestDtoValidator : AbstractValidator<AddContactPostRequestDto>
     {
         public AddContactPostRequestDtoValidator()
         {

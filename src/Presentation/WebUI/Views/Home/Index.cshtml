@@ -821,34 +821,34 @@
                                                 <div id="contact_message_1" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
 
                                                 <!-- FORM -->
-                                                <form method="post" role="form" id="frm'" class="contact-form" onSubmit="return false">
+                                                <form action="@Url.Action("SendContact", "Home")" method="post" role="form" id="frm" class="contact-form">
                                                     <ul class="row">
                                                         <li class="col-sm-4">
                                                             <label>
-                                                                <input type="text" class="form-control" name="name" id="name_1" placeholder="NAME">
+                                                                <input asp-for="FullName" type="text" class="form-control" name="FullName" id="name_1" placeholder="NAME">
                                                             </label>
-                                                           <span asp-validation-for="FullName"></span>
+                                                            <span asp-validation-for="FullName" class="text-danger"></span>
                                                         </li>
                                                         <li class="col-sm-4">
                                                             <label>
-                                                                <input type="text" class="form-control" name="email" id="email_1" placeholder="EMAIL">
+                                                                <input asp-for="Email" type="text" class="form-control" name="Email" id="email_1" placeholder="EMAIL">
                                                             </label>
-                                                           <span asp-validation-for="Email"></span>
+                                                            <span asp-validation-for="Email" class="text-danger"></span>
                                                         </li>
                                                         <li class="col-sm-4">
                                                             <label>
-                                                                <input type="text" class="form-control" name="company" id="company_1" placeholder="SUBJECT">
+                                                                <input asp-for="Subject" type="text" class="form-control" name="Subject" id="company_1" placeholder="SUBJECT">
                                                             </label>
-                                                           <span asp-validation-for="Subject"></span>
+                                                            <span asp-validation-for="Subject" class="text-danger"></span>
                                                         </li>
                                                         <li class="col-sm-12">
                                                             <label>
-                                                                <textarea class="form-control" name="message" id="message_1" rows="5" placeholder="CONTENT..."></textarea>
+                                                                <textarea asp-for="Content" class="form-control" name="Content" id="message_1" rows="5" placeholder="CONTENT..."></textarea>
                                                             </label>
-                                                           <span asp-validation-for="Content"></span>
+                                                            <span asp-validation-for="Content" class="text-danger"></span>
                                                         </li>
                                                         <li class="col-sm-12">
-                                                            <button type="submit" value="submit" id="btn_submit_1" onClick="proceed();">SEND ME</button>
+                                                            <button type="submit" value="submit" id="btn_submit_1">SEND ME</button>
                                                         </li>
                                                     </ul>
                                                 </form>
@@ -877,7 +877,7 @@
 
             const fd = new FormData(element);
 
-            fetch(`${location.href}`, {
+            fetch(`/send-contact`, {
                 method: 'POST',
                 body: fd,
                 headers: {
@@ -898,7 +898,7 @@
                     return;
                 }
 
-                iziToast.error({
+                iziToast.warning({
                     title: 'Error',
                     message: res.message,
                     timeout: 5000,

@@ -189,7 +189,6 @@
 
             const fd = new FormData(element);
 
-
             fetch(`/send-contact`, {
                 method: 'POST',
                 body: fd,
@@ -197,30 +196,30 @@
 
                 }
             })
-            .then(res => res.json())
-            .then(res => {
+                .then(res => res.json())
+                .then(res => {
 
-                if (res.error == false) {
-                    iziToast.success({
-                        title: 'Success',
+                    if (res.error == false) {
+                        iziToast.success({
+                            title: 'Success',
+                            message: res.message,
+                            timeout: 5000,
+                            position: 'bottomRight'
+                        });
+                        element.reset();
+                        return;
+                    }
+
+                    iziToast.warning({
+                        title: 'Error',
                         message: res.message,
                         timeout: 5000,
                         position: 'bottomRight'
                     });
-                    element.reset();
-                    return;
-                }
-
-                iziToast.error({
-                    title: 'Error',
-                    message: res.message,
-                    timeout: 5000,
-                    position: 'bottomRight'
+                })
+                .catch(e => {
+                    console.error(e);
                 });
-            })
-            .catch(e => {
-                console.error(e);
-            });
         });
     </script>
 }

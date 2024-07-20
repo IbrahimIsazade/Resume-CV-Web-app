@@ -1,7 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using Services;
+using Services.ContactPost;
 
 namespace WebUI
 {
@@ -27,7 +28,7 @@ namespace WebUI
             {
                 cfg.DisableDataAnnotationsValidation = false;
             });
-            builder.Services.AddValidatorsFromAssemblyContaining<IServiceReferance>(includeInternalTypes: true);
+            builder.Services.AddValidatorsFromAssemblyContaining<AddContactPostRequestDtoValidator>(includeInternalTypes: true);
 
             var app = builder.Build();
 
@@ -35,7 +36,6 @@ namespace WebUI
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

@@ -26,15 +26,15 @@ namespace WebUI.Controllers
                 {
                     foreach (var error in state.Value.Errors)
                     {
-                        Console.WriteLine($"Error: {error.ErrorMessage}");
+                        return Json(new
+                        {
+                            error = true,
+                            message = error.ErrorMessage
+                        });
                     }
                 }
 
-                return Json(new
-                {
-                    error = true,
-                    message = ModelState.ValidationState.ToString()
-                });
+                
             }
 
             var res = await contactPostService.Add(model);
