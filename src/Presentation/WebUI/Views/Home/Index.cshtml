@@ -15,7 +15,6 @@
                             <h4>Resume </h4>
                             <a href="resume(edit-mode).html">Edit Resume</a>
                         </div>
-                        <div class="col-sm-6"> <a id="cd-menu-trigger" href="#0"><span class="cd-menu-icon"></span></a> </div>
                     </div>
                 </div>
 
@@ -93,7 +92,7 @@
                                 <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
 
                                 <!-- FORM -->
-                                <form method="post" class="contact-form" id="frm">
+                                <form method="post" asp-controller="Home" asp-action="SendContact" class="contact-form" id="frm">
                                     <ul class="row">
                                         <li class="col-sm-12">
                                             <label>

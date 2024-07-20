@@ -41,20 +41,10 @@
   <nav id="cd-lateral-nav">
     <h5 class="tittle">MotiCv</h5>
     <ul class="cd-navigation">
-      <li><a href="index.html">Index Main</a></li>
-      <li><a href="index-1.html">Index 2</a></li>
-      <li><a href="index-2.html">Index 3</a></li>
-      <li><a href="index-3-pages.html">Index Links</a></li>
-      <li><a href="about-me.html">About Me</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li class="item-has-children"> <a href="index.html">Pages</a>
-        <ul class="sub-menu">
-          <li><a href="blog-single.html">Blog Details</a></li>
-          <li><a href="resume(edit-mode).html">Resume (edit mode)</a></li>
-          <li><a href="resume(edit-professional-experience).html">Resume (edit professional experience)</a></li>
-        </ul>
-      </li>
+      <li><a asp-action="About">About Me</a></li>
+      <li><a asp-action="Portfolio">Portfolio</a></li>
+      <li><a asp-action="Blog">Blog</a></li>
+      <li><a asp-action="Contact">Contact</a></li>
     </ul>
     <h5 class="tittle">Latest Post</h5>
     <ul class="latest-post">
@@ -62,7 +52,7 @@
       <!-- Post Small -->
       <li>
         <div class="media">
-          <div class="media-left"> <a href="#."><img src="images/small-img.jpg" alt=""></a></div>
+          <div class="media-left"> <a href="#."><img src="~/images/small-img.jpg" alt=""></a></div>
           <div class="media-body"> <a href="#.">Hello Itaewon 
             Project</a>
             <p class="font-crimson font-italic">Webdesign</p>
@@ -93,6 +83,7 @@
   <!-- End Header --> 
   
   <!-- Content -->
+
   @RenderBody();
   <!-- End Content --> 
   

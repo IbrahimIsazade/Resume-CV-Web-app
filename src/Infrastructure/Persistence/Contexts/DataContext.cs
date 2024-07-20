@@ -19,6 +19,9 @@ namespace Persistence.Contexts
 
         public DbSet<Service> Services { get; set; }
         public DbSet<ContactPost> ContactPosts { get; set; }
+        public DbSet<SkillGroup> SkillGroups { get; set; }
+        public DbSet<PersonSkill> PersonSkills { get; set; }
+        public DbSet<SkillType> SkillTypes { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

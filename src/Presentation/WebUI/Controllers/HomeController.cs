@@ -11,21 +11,31 @@ namespace WebUI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(AddContactPostRequestDto model)
+        public IActionResult Contact()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    Console.WriteLine("Returning view");
-            //    return View(model);
+            return View();
+        }
 
-            //    return Json(new
-            //    {
-            //        error = true,
-            //        message = ModelState.ValidationState.ToString()
-            //    });
-            //}
-            //return View();
+        [HttpPost]
+        [Route("/send-contact")]
+        public async Task<IActionResult> SendContact(AddContactPostRequestDto model)
+        {
+            if (!ModelState.IsValid)
+            {
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        Console.WriteLine($"Error: {error.ErrorMessage}");
+                    }
+                }
+
+                return Json(new
+                {
+                    error = true,
+                    message = ModelState.ValidationState.ToString()
+                });
+            }
 
             var res = await contactPostService.Add(model);
 
