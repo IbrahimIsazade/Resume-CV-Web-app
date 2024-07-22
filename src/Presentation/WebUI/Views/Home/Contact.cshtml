@@ -45,10 +45,10 @@
                   <p> <span> FAX</span> (800) 123-4568 </p>
                 </li>
                 <li>
-                  <p> <span> E-mail</span> <a href="#."> example@example.com</a> </p>
+                  <p> <span> E-mail</span> <a href="#"> example@example.com</a> </p>
                 </li>
                 <li>
-                  <p> <span> Website</span><a href="#."> example.com </a></p>
+                  <p> <span> Website</span><a href=""> example.com </a></p>
                 </li>
               </ul>
               
@@ -69,11 +69,11 @@
               <h5 class="tittle">Social Profiles</h5>
               <div class="social-icon bor-btm padding-25">
                 <ul>
-                  <li> <a href="#."> <i class="fa fa-facebook"></i></a> </li>
-                  <li> <a href="#."> <i class="fa fa-google"></i></a> </li>
-                  <li> <a href="#."> <i class="fa fa-twitter"></i></a> </li>
-                  <li> <a href="#."> <i class="fa fa-linkedin"></i></a> </li>
-                  <li> <a href="#."> <i class="fa fa-skype"></i></a> </li>
+                  <li> <a asp-action=""> <i class="fa fa-facebook"></i></a> </li>
+                  <li> <a asp-action=""> <i class="fa fa-google"></i></a> </li>
+                  <li> <a asp-action=""> <i class="fa fa-twitter"></i></a> </li>
+                  <li> <a asp-action=""> <i class="fa fa-linkedin"></i></a> </li>
+                  <li> <a asp-action=""> <i class="fa fa-skype"></i></a> </li>
                 </ul>
               </div>
             </div>
@@ -81,6 +81,25 @@
           
           <!-- MAIN CONTENT -->
           <div class="col-md-8">
+
+            <!-- NAV LINKS -->
+            <nav>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-tabis" aria-expanded="false"> <span class="tittle">MENU</span> <span class="fa fa-navicon icon-nav"></span> </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="nav-tabis">
+                    <ul class="isop-filter main-nav">
+                        <li><a asp-action="Index"><i class="icon-user"></i> ABOUT ME</a></li>
+                        <li><a asp-action="Resume"><i class="icon-book-open"></i>RESUME</a></li>
+                        <li><a asp-action="Portfolio"><i class="icon-rocket"></i>PORTFOLIO</a></li>
+                        <li><a asp-action="Blog"><i class="icon-note"></i>BLOG</a></li>
+                        <li><a asp-action="Contact"><i class="icon-pencil"></i>CONTACT ME</a></li>
+                        <li><a id="cd-menu-trigger" href="#0" class=""><span class="cd-menu-icon"></span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- NAV LINKS END -->
+
             <div class="inside-sec"> 
               <!-- BIO AND SKILLS -->
               <h5 class="tittle">CONATCT ME</h5>
