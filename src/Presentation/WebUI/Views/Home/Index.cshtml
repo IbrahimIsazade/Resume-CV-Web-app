@@ -869,13 +869,30 @@
     <script>
 
         const form = document.querySelector('#frm');
+        var date = new Date();
+        localStorage.setItem("LastMsg", null);
 
         form.addEventListener('submit', function (e) {
             let element = e.currentTarget;
-
             e.preventDefault();
-
             const fd = new FormData(element);
+
+            if (parseInt(date.getMinutes()) - localStorage.getItem("LastMsg") <1) {
+                iziToast.warning({
+                    title: 'Warning',
+                    message: "Wait 1 minute to send next message",
+                    timeout: 4000,
+                    position: 'bottomRight'
+                });
+                return;
+            }
+
+            iziToast.info({
+                title: 'Info',
+                message: "Sending message...",
+                timeout: 2500,
+                position: 'bottomRight'
+            });
 
             fetch(`/send-contact`, {
                 method: 'POST',
@@ -886,7 +903,6 @@
             })
             .then(res => res.json())
             .then(res => {
-
                 if (res.error == false) {
                     iziToast.success({
                         title: 'Success',
@@ -895,6 +911,7 @@
                         position: 'bottomRight'
                     });
                     element.reset();
+                    localStorage.setItem("LastMsg", date.getMinutes());
                     return;
                 }
 
