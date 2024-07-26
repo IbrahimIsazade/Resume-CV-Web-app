@@ -1,14 +1,23 @@
 ﻿using Domain;
 using Domain.Entities;
+using Domain.Entities.Membership;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace Persistence.Contexts
 {
-    class DataContext : DbContext
+    class DataContext : IdentityDbContext<MoticvUser, MoticvRole, int, MoticvUserClaim, MoticvUserRole, MoticvUserLogin, MoticvRoleClaim, MoticvUserToken>
     {
-        public DataContext(DbContextOptions options)
-            : base(options) { }
+        public DataContext(DbContextOptions options) : base(options) { }
+
+
+        public DbSet<ContactPost> ContactPosts { get; set; }
+        public DbSet<Resume> Resumes { get; set; }
+        public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<AcademicBackground> AcademicBackgrounds { get; set; }
+        public DbSet<Detail> Details { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
+        public DbSet<Social> Socials { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -16,13 +25,6 @@ namespace Persistence.Contexts
 
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
-
-        public DbSet<ContactPost> ContactPosts { get; set; }
-        public DbSet<Person> Persons { get; set; }
-        public DbSet<PersonSkill> PersonSkills { get; set; }
-        public DbSet<Service> Services { get; set; }
-        public DbSet<SkillGroup> SkillGroups { get; set; }
-        public DbSet<SkillType> SkillTypes { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

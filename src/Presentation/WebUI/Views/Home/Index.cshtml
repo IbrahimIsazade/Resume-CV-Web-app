@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <h4>Resume </h4>
-                            <a href="resume(edit-mode).html">Edit Resume</a>
+                            <a asp-action="Edit">Edit Resume</a>
                         </div>
                     </div>
                 </div>
@@ -877,10 +877,10 @@
             e.preventDefault();
             const fd = new FormData(element);
 
-            if (parseInt(date.getMinutes()) - localStorage.getItem("LastMsg") <1) {
+            if (parseInt(date.getSeconds()) - localStorage.getItem("LastMsg") < 5) {
                 iziToast.warning({
                     title: 'Warning',
-                    message: "Wait 1 minute to send next message",
+                    message: "Wait 5 seconds",
                     timeout: 4000,
                     position: 'bottomRight'
                 });
@@ -911,7 +911,7 @@
                         position: 'bottomRight'
                     });
                     element.reset();
-                    localStorage.setItem("LastMsg", date.getMinutes());
+                    localStorage.setItem("LastMsg", date.getSeconds());
                     return;
                 }
 
@@ -921,6 +921,8 @@
                     timeout: 5000,
                     position: 'bottomRight'
                 });
+                localStorage.setItem("LastMsg", date.getSeconds());
+                return;
             })
             .catch(e => {
                 console.error(e);

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
   </ItemGroup>
 
   <ItemGroup>

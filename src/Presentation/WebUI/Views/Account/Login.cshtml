@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <label>Email:</label>
+    <input name="email" type="email" placeholder="example@gmail.com" value="email@gmail.com" /> <br />
+
+    <label>Password:</label>
+    <input name="password" type="password" placeholder="Password" value="Somepassword1." /> <br />
+
+    <button>Log in</button>
+</form>
+
