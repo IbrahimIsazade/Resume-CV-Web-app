@@ -1,6 +1,7 @@
 ﻿using Domain;
 using Domain.Entities;
 using Domain.Entities.Membership;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,6 @@ namespace Persistence.Contexts
     class DataContext : IdentityDbContext<MoticvUser, MoticvRole, int, MoticvUserClaim, MoticvUserRole, MoticvUserLogin, MoticvRoleClaim, MoticvUserToken>
     {
         public DataContext(DbContextOptions options) : base(options) { }
-
 
         public DbSet<ContactPost> ContactPosts { get; set; }
         public DbSet<Resume> Resumes { get; set; }
@@ -22,6 +22,8 @@ namespace Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<MoticvUserClaim>().HasKey(x => x.Id);
 
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }

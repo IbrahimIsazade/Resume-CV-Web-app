@@ -162,26 +162,21 @@
                       <ul class="row">
                         <li class="col-sm-4">
                           <label>
-                            <input asp-for="FullName" type="text" class="form-control" name="FullName" id="name" placeholder="NAME">
+                            <input asp-for="Email" type="text" class="form-control" name="email" id="email" placeholder="EMAIL">
                           </label>
                         </li>
                         <li class="col-sm-4">
                           <label>
-                            <input asp-for="Email" type="text" class="form-control" name="Email" id="email" placeholder="EMAIL">
-                          </label>
-                        </li>
-                        <li class="col-sm-4">
-                          <label>
-                            <input asp-for="Subject" type="text" class="form-control" name="Subject" id="company" placeholder="SUBJECT">
+                            <input asp-for="Title" type="text" class="form-control" name="title" id="company" placeholder="SUBJECT">
                           </label>
                         </li>
                         <li class="col-sm-12">
                           <label>
-                            <textarea asp-for="Content" value="loremloremloremloremloremloremlorem" class="form-control" name="Content" id="message" rows="5" placeholder="CONTENT..."></textarea>
+                            <textarea asp-for="Content" value="loremloremloremloremloremloremlorem" class="form-control" name="content" id="message" rows="5" placeholder="CONTENT..."></textarea>
                           </label>
                         </li>
                         <li class="col-sm-12">
-                          <button type="submit" value="submit" id="btn_submit">SEND ME</button>
+                          <button type="submit" value="submit" id="btn_submit">SEND</button>
                         </li>
                       </ul>
                     </form>
@@ -195,6 +190,8 @@
     </div>
   </div>
     </main>
+
+
 @section addjs {
     <script>
 

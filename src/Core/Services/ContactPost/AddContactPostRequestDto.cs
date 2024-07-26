@@ -13,9 +13,10 @@ namespace Services.ContactPost
     }
     public class AddContactPostRequestDto
     {
-        public required string FullName { get; set; }
+        public required int SenderId { get; set; }
+        public required int RecieverId { get; set; }
         public required string Email { get; set; }
-        public required string Subject { get; set; }
+        public required string Title { get; set; }
         public required string Content { get; set; }
 
     }

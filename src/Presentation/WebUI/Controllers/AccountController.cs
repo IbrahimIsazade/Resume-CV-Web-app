@@ -1,7 +1,10 @@
 ﻿using Domain.Entities.Membership;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace WebUI.Controllers
 {
@@ -45,7 +48,7 @@ namespace WebUI.Controllers
 
         [HttpPost]
         [Route("/login.html")]
-        public async Task<IActionResult> LoginUser(string email, string password)
+        public async Task<IActionResult> Login(string email, string password)
         {
             var user = await userManager.FindByEmailAsync(email);
 
@@ -55,7 +58,13 @@ namespace WebUI.Controllers
                 goto l1;
             }
 
-            var result = await signInManager.PasswordSignInAsync(user, password, true, true);
+            if (string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(email)) 
+            {
+                ModelState.AddModelError("User", "Username or password cannot be empty");
+                goto l1;
+            }
+
+            var result = await signInManager.CheckPasswordSignInAsync(user, password, true);
 
             if (result.IsLockedOut)
             {
@@ -66,7 +75,27 @@ namespace WebUI.Controllers
             {
                 ModelState.AddModelError("User", "Username or password is incorrect");
                 goto l1;
+            }else if (!user.EmailConfirmed)
+            {
+                ModelState.AddModelError("User", "Email not confirmed !");
+                goto l1;
             }
+
+            var claims = new List<Claim> {
+    new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
+};
+
+            var now = DateTime.UtcNow;
+            var properties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                IssuedUtc = now,
+                ExpiresUtc = now.AddMinutes(2)
+            };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            await Request.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, properties);
 
             string? callbackUrl = Request.Query["ReturnUrl"];
 

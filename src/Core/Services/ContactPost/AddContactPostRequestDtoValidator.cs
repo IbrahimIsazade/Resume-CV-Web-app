@@ -11,18 +11,13 @@ namespace Services.ContactPost
     {
         public AddContactPostRequestDtoValidator()
         {
-            RuleFor(m => m.FullName)
-                .NotNull()
-                .NotEmpty()
-                .MinimumLength(2)
-                .WithMessage("Name must be at least 2 symbols");
 
             RuleFor(m => m.Email)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Email cannot be empty");
 
-            RuleFor(m => m.Subject)
+            RuleFor(m => m.Title)
                 .NotNull()
                 .NotEmpty()
                 .MinimumLength(2)

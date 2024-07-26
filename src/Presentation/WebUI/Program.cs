@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence;
 using Services;
 using Services.ContactPost;
 
@@ -29,13 +30,14 @@ namespace WebUI
                 cfg.Filters.Add(new AuthorizeFilter(policy));
             });
 
-            builder.Services.AddDbContext<DbContext>(cfg =>
+            builder.Services.AddDataContext(cfg =>
             {
                 cfg.UseSqlServer(builder.Configuration.GetConnectionString("cString"), opt =>
                 {
                     opt.MigrationsHistoryTable("MigrationHistory");
                 });
             });
+
 
             builder.Services.AddFluentValidationAutoValidation(cfg =>
             {
@@ -46,18 +48,12 @@ namespace WebUI
 
             builder.Services.AddHttpContextAccessor();
 
-            builder.Services.AddIdentityCore<MoticvUser>()
-                .AddRoles<MoticvRole>()
-                .AddEntityFrameworkStores<DbContext>()
-                .AddDefaultTokenProviders();
-
             builder.Services.AddAuthentication( cfg =>
             {
                 cfg.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 cfg.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 cfg.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 cfg.DefaultForbidScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                cfg.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 cfg.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 cfg.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(cfg =>

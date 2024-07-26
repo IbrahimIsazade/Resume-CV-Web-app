@@ -94,11 +94,7 @@
                                 <!-- FORM -->
                                 <form method="post" asp-controller="Home" asp-action="SendContact" class="contact-form" id="frm">
                                     <ul class="row">
-                                        <li class="col-sm-12">
-                                            <label>
-                                                <input asp-for="FullName" type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname">
-                                            </label>
-                                        </li>
+                                        <span asp-validation-summary="All" class="col-sm-12"></span>
                                         <li class="col-sm-12">
                                             <label>
                                                 <input asp-for="Email" type="text" class="form-control" name="email" id="email" placeholder="Email">
@@ -106,7 +102,7 @@
                                         </li>
                                         <li class="col-sm-12">
                                             <label>
-                                                <input asp-for="Subject" type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                                                <input asp-for="Title" type="text" class="form-control" name="title" id="subject" placeholder="Subject">
                                             </label>
                                         </li>
                                         <li class="col-sm-12">
@@ -821,14 +817,9 @@
                                                 <div id="contact_message_1" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
 
                                                 <!-- FORM -->
-                                                <form action="@Url.Action("SendContact", "Home")" method="post" role="form" id="frm" class="contact-form">
+                                                <form asp-controller="Home" asp-action="SendContact" method="post" role="form" id="frm" class="contact-form">
+                                                    <div asp-validation-summary="All" class="text-danger"></div>
                                                     <ul class="row">
-                                                        <li class="col-sm-4">
-                                                            <label>
-                                                                <input asp-for="FullName" type="text" class="form-control" name="FullName" id="name_1" placeholder="NAME">
-                                                            </label>
-                                                            <span asp-validation-for="FullName" class="text-danger"></span>
-                                                        </li>
                                                         <li class="col-sm-4">
                                                             <label>
                                                                 <input asp-for="Email" type="text" class="form-control" name="Email" id="email_1" placeholder="EMAIL">
@@ -837,9 +828,9 @@
                                                         </li>
                                                         <li class="col-sm-4">
                                                             <label>
-                                                                <input asp-for="Subject" type="text" class="form-control" name="Subject" id="company_1" placeholder="SUBJECT">
+                                                                <input asp-for="Title" type="text" class="form-control" name="title" id="company_1" placeholder="SUBJECT">
                                                             </label>
-                                                            <span asp-validation-for="Subject" class="text-danger"></span>
+                                                            <span asp-validation-for="Title" class="text-danger"></span>
                                                         </li>
                                                         <li class="col-sm-12">
                                                             <label>
@@ -869,15 +860,16 @@
     <script>
 
         const form = document.querySelector('#frm');
-        var date = new Date();
         localStorage.setItem("LastMsg", null);
 
         form.addEventListener('submit', function (e) {
             let element = e.currentTarget;
             e.preventDefault();
             const fd = new FormData(element);
+            var date = new Date();
+            var passedTime = date.getSeconds() - localStorage.getItem("LastMsg")
 
-            if (parseInt(date.getSeconds()) - localStorage.getItem("LastMsg") < 5) {
+            if (passedTime < 5 && passedTime >= 0) {
                 iziToast.warning({
                     title: 'Warning',
                     message: "Wait 5 seconds",
@@ -889,17 +881,15 @@
 
             iziToast.info({
                 title: 'Info',
-                message: "Sending message...",
-                timeout: 2500,
+                message: "Pending...",
+                timeout: 1000,
                 position: 'bottomRight'
             });
 
             fetch(`/send-contact`, {
                 method: 'POST',
                 body: fd,
-                headers: {
-
-                }
+                headers: { }
             })
             .then(res => res.json())
             .then(res => {

@@ -2,6 +2,6 @@
 {
     public interface IContactPostService
     {
-        Task<AddContactPostResponseDto> Add(AddContactPostRequestDto model);
+        Task<AddContactPostResponseDto> Add(AddContactPostRequestDto model, int id);
     }
 }
