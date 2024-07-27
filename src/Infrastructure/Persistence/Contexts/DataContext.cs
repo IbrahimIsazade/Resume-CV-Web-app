@@ -12,12 +12,8 @@ namespace Persistence.Contexts
         public DataContext(DbContextOptions options) : base(options) { }
 
         public DbSet<ContactPost> ContactPosts { get; set; }
-        public DbSet<Resume> Resumes { get; set; }
-        public DbSet<Attachment> Attachments { get; set; }
-        public DbSet<AcademicBackground> AcademicBackgrounds { get; set; }
-        public DbSet<Detail> Details { get; set; }
-        public DbSet<Experience> Experiences { get; set; }
-        public DbSet<Social> Socials { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

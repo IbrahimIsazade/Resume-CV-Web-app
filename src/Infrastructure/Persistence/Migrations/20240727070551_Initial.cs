@@ -20,29 +20,18 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SenderId = table.Column<int>(type: "int", nullable: false),
-                    RecieverId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AnsweredAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AnsweredBy = table.Column<int>(type: "int", nullable: true),
+                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ContactPosts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Resumes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Bio = table.Column<string>(type: "nvarchar", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Resumes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,112 +75,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AcademicBackgrounds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ResumeId = table.Column<int>(type: "int", nullable: false),
-                    Qualification = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Degree = table.Column<byte>(type: "tinyint", nullable: false),
-                    EducationName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Obtention = table.Column<int>(type: "int", nullable: false),
-                    Details = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AcademicBackgrounds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AcademicBackgrounds_Resumes_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resumes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Attachments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ResumeId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    FilePath = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Attachments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Attachments_Resumes_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resumes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Details",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ResumeId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Details", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Details_Resumes_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resumes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Experiences",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ResumeId = table.Column<int>(type: "int", nullable: false),
-                    Duration = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    JobTitle = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CompanyName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Details = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Experiences", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Experiences_Resumes_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resumes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Socials",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ResumeId = table.Column<int>(type: "int", nullable: false),
-                    Url = table.Column<string>(type: "varchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Socials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Socials_Resumes_ResumeId",
-                        column: x => x.ResumeId,
-                        principalTable: "Resumes",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -312,26 +195,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AcademicBackgrounds_ResumeId",
-                table: "AcademicBackgrounds",
-                column: "ResumeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Attachments_ResumeId",
-                table: "Attachments",
-                column: "ResumeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Details_ResumeId",
-                table: "Details",
-                column: "ResumeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Experiences_ResumeId",
-                table: "Experiences",
-                column: "ResumeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
                 schema: "Membership",
                 table: "RoleClaims",
@@ -344,11 +207,6 @@ namespace Persistence.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Socials_ResumeId",
-                table: "Socials",
-                column: "ResumeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -387,26 +245,11 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AcademicBackgrounds");
-
-            migrationBuilder.DropTable(
-                name: "Attachments");
-
-            migrationBuilder.DropTable(
                 name: "ContactPosts");
-
-            migrationBuilder.DropTable(
-                name: "Details");
-
-            migrationBuilder.DropTable(
-                name: "Experiences");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims",
                 schema: "Membership");
-
-            migrationBuilder.DropTable(
-                name: "Socials");
 
             migrationBuilder.DropTable(
                 name: "UserClaims",
@@ -423,9 +266,6 @@ namespace Persistence.Migrations
             migrationBuilder.DropTable(
                 name: "UserTokens",
                 schema: "Membership");
-
-            migrationBuilder.DropTable(
-                name: "Resumes");
 
             migrationBuilder.DropTable(
                 name: "Roles",

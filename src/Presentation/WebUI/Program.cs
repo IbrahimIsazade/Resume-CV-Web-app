@@ -46,7 +46,7 @@ namespace WebUI
 
             builder.Services.AddValidatorsFromAssemblyContaining<AddContactPostRequestDtoValidator>(includeInternalTypes: true);
 
-            builder.Services.AddHttpContextAccessor();
+            //builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddAuthentication( cfg =>
             {

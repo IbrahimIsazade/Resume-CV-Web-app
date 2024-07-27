@@ -1,21 +1,20 @@
 ﻿using Repositories;
 using Services.ContactPost;
-using Domain.Entities;
 
 namespace Services.Impl
 {
     public class ContactPostService(IContactPostRepository contactPostRepository) : IContactPostService
     {
-        public async Task<AddContactPostResponseDto> Add(AddContactPostRequestDto model, int id)
+        public async Task<AddContactPostResponseDto> Add(AddContactPostRequestDto model)
         {
 
             var post = new Domain.Entities.ContactPost
             {
-                SenderId = id,
-                RecieverId = 1,
-                Title = model.Title,
+                FullName = model.FullName,
                 Email = model.Email,
-                Content = model.Content
+                Subject = model.Subject,
+                Content = model.Content,
+                CreatedAt = DateTime.UtcNow,
             };
 
             try

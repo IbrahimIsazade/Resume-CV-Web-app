@@ -17,7 +17,13 @@ namespace Services.ContactPost
                 .NotEmpty()
                 .WithMessage("Email cannot be empty");
 
-            RuleFor(m => m.Title)
+            RuleFor(m => m.Subject)
+                .NotNull()
+                .NotEmpty()
+                .MinimumLength(2)
+                .WithMessage("Subject must be at least 2 symbols");
+
+            RuleFor(m => m.FullName)
                 .NotNull()
                 .NotEmpty()
                 .MinimumLength(2)

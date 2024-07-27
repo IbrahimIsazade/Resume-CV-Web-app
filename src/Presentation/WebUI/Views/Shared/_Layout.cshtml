@@ -1,4 +1,5 @@
-﻿    <!doctype html>
+﻿@model AddContactPostRequestDto    
+<!doctype html>
 <html class="no-js" lang="en">
 
 <!-- Mirrored from new.uouapps.com/remoticv/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 May 2019 06:20:30 GMT -->
@@ -39,7 +40,7 @@
 <body>
 
 <!-- Page Wrapper -->
-<div id="wrap"> 
+<main id="wrap"> 
   
   <!-- Header -->
   <nav id="cd-lateral-nav">
@@ -49,6 +50,7 @@
       <li><a asp-action="Portfolio">Portfolio</a></li>
       <li><a asp-action="Blog">Blog</a></li>
       <li><a asp-action="Contact">Contact</a></li>
+      <li><a asp-controller="Account" asp-action="Login">Sign In</a></li>
     </ul>
     <h5 class="tittle">Latest Post</h5>
     <ul class="latest-post">
@@ -88,7 +90,134 @@
   
   <!-- Content -->
 
-  @RenderBody();
+        <main class="cd-main-content">
+            <div id="content">
+                <div class="resume">
+                    <div class="container">
+
+                        <!-- TOP HEAD -->
+                        <div class="top-head">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h4>Resume </h4>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <a asp-action="Edit">Edit Resume</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resume -->
+                        <div class="row">
+                            <!-- Sidebar -->
+                            <div class="col-md-4">
+                                <div class="side-bar">
+
+                                    <!-- Professional Details -->
+                                    <h5 class="tittle">Professional Details</h5>
+                                    <img src="images/avatar.jpg" class="img-responsive" alt="">
+                                    <ul class="personal-info">
+                                        <li>
+                                            <p> <span> Name</span> John Doe </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Age</span> 38 Years </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Location</span> Rome, Italy </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Experience</span> 15 Years </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Degree</span> MBA </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Career Level</span> Mid-Level </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Phone</span> (800) 123-4567 </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> FAX</span> (800) 123-4568 </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> E-mail</span> <a href="#."> example@example.com</a> </p>
+                                        </li>
+                                        <li>
+                                            <p> <span> Website</span><a href="#."> example.com </a></p>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Attachments -->
+                                    <h5 class="tittle">Attachments</h5>
+                                    <div class="attach bor-btm padding-25">
+                                        <ul>
+                                            <li>
+                                                <p><img src="images/pdf-icon.jpg" alt=""> Curriculum-Vitae.pdf <a href="#."><i class="fa fa-cloud-download"></i></a> <a href="#."><i class="fa fa-eye"></i></a></p>
+                                            </li>
+                                            <li>
+                                                <p><img src="images/word-icon.jpg" alt=""> COE.docx <a href="#."><i class="fa fa-cloud-download"></i></a> <a href="#."><i class="fa fa-eye"></i></a></p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Social Profiles -->
+                                    <h5 class="tittle">Social Profiles</h5>
+                                    <div class="social-icon bor-btm padding-25">
+                                        <ul>
+                                            <li> <a href="#."> <i class="fa fa-facebook"></i></a> </li>
+                                            <li> <a href="#."> <i class="fa fa-google"></i></a> </li>
+                                            <li> <a href="#."> <i class="fa fa-twitter"></i></a> </li>
+                                            <li> <a href="#."> <i class="fa fa-linkedin"></i></a> </li>
+                                            <li> <a href="#."> <i class="fa fa-skype"></i></a> </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Contact Me -->
+                                    <h5 class="tittle">Contact Me</h5>
+                                    <div class="contact padding-25">
+                                        <!-- Success Msg -->
+                                        <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
+
+                                        <!-- FORM -->
+                                        <form method="post" asp-controller="Home" asp-action="SendContact" class="contact-form" id="frm">
+                                            <ul class="row">
+                                                <li class="col-sm-12">
+                                                    <label>
+                                                        <input asp-for="FullName" type="text" class="form-control" name="fullname" id="fullname" placeholder="Fullname">
+                                                    </label>
+                                                </li>
+                                                <li class="col-sm-12">
+                                                    <label>
+                                                        <input asp-for="Email" type="text" class="form-control" name="email" id="email" placeholder="Email">
+                                                    </label>
+                                                </li>
+                                                <li class="col-sm-12">
+                                                    <label>
+                                                        <input asp-for="Subject" type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
+                                                    </label>
+                                                </li>
+                                                <li class="col-sm-12">
+                                                    <label>
+                                                        <textarea asp-for="Content" class="form-control" name="content" id="content" rows="5" placeholder="Message"></textarea>
+                                                    </label>
+                                                </li>
+                                                <li class="col-sm-12">
+                                                    <button type="submit" value="submit" id="btn_submit">Send Message</button>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            @RenderBody();
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
   <!-- End Content --> 
   
   <!-- Footer -->

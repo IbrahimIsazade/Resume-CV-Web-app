@@ -12,7 +12,7 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240726102854_Initial")]
+    [Migration("20240727070551_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,72 +25,6 @@ namespace Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.AcademicBackground", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte>("Degree")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EducationName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int>("Obtention")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Qualification")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("AcademicBackgrounds", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Attachment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar");
-
-                    b.Property<int>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("Attachments", (string)null);
-                });
-
             modelBuilder.Entity("Domain.Entities.ContactPost", b =>
                 {
                     b.Property<int>("Id")
@@ -99,105 +33,37 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("AnsweredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("AnsweredBy")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecieverId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("FullName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContactPosts", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Detail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("Details", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Experience", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("JobTitle")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("Experiences", (string)null);
+                    b.ToTable("ContactPosts");
                 });
 
             modelBuilder.Entity("Domain.Entities.Membership.MoticvRole", b =>
@@ -401,84 +267,6 @@ namespace Persistence.Migrations
                     b.ToTable("UserTokens", "Membership");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Resume", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Bio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Resumes", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Social", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ResumeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("varchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResumeId");
-
-                    b.ToTable("Socials", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.AcademicBackground", b =>
-                {
-                    b.HasOne("Domain.Entities.Resume", null)
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Attachment", b =>
-                {
-                    b.HasOne("Domain.Entities.Resume", null)
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Detail", b =>
-                {
-                    b.HasOne("Domain.Entities.Resume", null)
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Experience", b =>
-                {
-                    b.HasOne("Domain.Entities.Resume", null)
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Domain.Entities.Membership.MoticvRoleClaim", b =>
                 {
                     b.HasOne("Domain.Entities.Membership.MoticvRole", null)
@@ -527,15 +315,6 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Social", b =>
-                {
-                    b.HasOne("Domain.Entities.Resume", null)
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
