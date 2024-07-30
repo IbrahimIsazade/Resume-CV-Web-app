@@ -38,7 +38,6 @@ namespace WebUI
                 });
             });
 
-
             builder.Services.AddFluentValidationAutoValidation(cfg =>
             {
                 cfg.DisableDataAnnotationsValidation = false;
@@ -75,8 +74,7 @@ namespace WebUI
             });
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
+            
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -90,6 +88,11 @@ namespace WebUI
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapAreaControllerRoute(
+                name: "admin",
+                areaName: "Admin",
+                pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

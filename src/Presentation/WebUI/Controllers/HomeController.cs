@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.ContactPost;
-using System.Security.Claims;
 
 namespace WebUI.Controllers
 {
@@ -12,6 +11,8 @@ namespace WebUI.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            Console.WriteLine("Gachu");
+
             return View();
         }
 

@@ -1,7 +1,6 @@
 ﻿using Domain;
 using Domain.Entities;
 using Domain.Entities.Membership;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +13,7 @@ namespace Persistence.Contexts
         public DbSet<ContactPost> ContactPosts { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProjectCategory> ProjectCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

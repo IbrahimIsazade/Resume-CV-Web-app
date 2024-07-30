@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CategoryGetAllDto>
+
+@foreach(var item in Model)
+{
+    <tr>
+        <td>
+            <div class="d-flex px-2 py-1">
+                <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">@item.Name</h6>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="d-flex flex-column justify-content-start">
+                <h6 class="mb-0 text-sm">@item.CreatedAt</h6>
+            </div>
+        </td>
+        <td class="align-middle">
+            <a href="javascript:;" class="btn bg-gradient-warning font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                Edit
+            </a>
+            <a href="javascript:;" class="btn bg-gradient-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                Remove
+            </a>
+        </td>
+    </tr>
+}

@@ -101,12 +101,20 @@ namespace WebUI.Controllers
 
             if (!string.IsNullOrWhiteSpace(callbackUrl))
             {
+                Console.WriteLine($"---==[ CALLBACK: {callbackUrl} ]==---");
                 return Redirect(callbackUrl);
             }
 
             return RedirectToAction("Index", "Home");
         l1:
             return View();
+        }
+
+        public async Task<string> Logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return "Succesfully logout";
         }
     }
 }
