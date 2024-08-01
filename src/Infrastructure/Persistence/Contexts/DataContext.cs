@@ -1,8 +1,8 @@
 ﻿using Domain;
 using Domain.Entities;
 using Domain.Entities.Membership;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Persistence.Contexts
 {
@@ -16,6 +16,7 @@ namespace Persistence.Contexts
         public DbSet<ProjectCategory> ProjectCategories { get; set; }
         public DbSet<SkillType> SkillTypes { get; set; }
         public DbSet<SkillGroup> SkillGroups { get; set; }
+        public DbSet<Skill> Skills { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
