@@ -14,6 +14,7 @@ namespace Persistence.Contexts
         public DbSet<Project> Projects { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProjectCategory> ProjectCategories { get; set; }
+        public DbSet<SkillType> SkillTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
