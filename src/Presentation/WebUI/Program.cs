@@ -1,4 +1,3 @@
-using Domain.Entities.Membership;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -6,9 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Persistence;
-using Services;
+using Services.Categories;
 using Services.ContactPost;
 
 namespace WebUI
@@ -44,6 +42,7 @@ namespace WebUI
             });
 
             builder.Services.AddValidatorsFromAssemblyContaining<AddContactPostRequestDtoValidator>(includeInternalTypes: true);
+            builder.Services.AddValidatorsFromAssemblyContaining<AddCategoryRequestDtoValidator>(includeInternalTypes: true);
 
             //builder.Services.AddHttpContextAccessor();
 
@@ -92,7 +91,7 @@ namespace WebUI
             app.MapAreaControllerRoute(
                 name: "admin",
                 areaName: "Admin",
-                pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
+                pattern: "Admin/{controller=Categories}/{action=Categories}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

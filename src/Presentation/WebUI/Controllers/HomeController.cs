@@ -11,8 +11,6 @@ namespace WebUI.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            Console.WriteLine("Gachu");
-
             return View();
         }
 

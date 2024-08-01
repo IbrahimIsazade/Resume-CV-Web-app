@@ -17,7 +17,7 @@ namespace Services.Impl
             return new AddCategoryResponseDto { Id = entity.Id, Name = entity.Name };
         }
 
-        public async Task<EditCategortDto> EditAsync(EditCategortDto model, CancellationToken cancellationToken = default)
+        public async Task<EditCategoryDto> Edit(EditCategoryDto model, CancellationToken cancellationToken = default)
         {
             var entity = await categoryRepository.GetAsync(m => m.Id == model.Id, cancellationToken);
 
@@ -41,6 +41,21 @@ namespace Services.Impl
                 .ToListAsync(cancellationToken);
 
             return data;
+        }
+
+        public async Task<bool> Remove(int id, CancellationToken cancellationToken = default)
+        {
+            var entity = await categoryRepository.GetAsync(m => m.Id == id, cancellationToken);
+
+            if (entity is null)
+            {
+                return false;
+            }
+
+            categoryRepository.Delete(entity);
+            await categoryRepository.SaveAsync(cancellationToken);
+
+            return true;
         }
     }
 }

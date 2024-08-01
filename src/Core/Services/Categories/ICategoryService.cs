@@ -4,6 +4,7 @@
     {
         Task<IEnumerable<CategoryGetAllDto>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<AddCategoryResponseDto> AddAsync(AddCategoryRequestDto model, CancellationToken cancellationToken = default);
-        Task<EditCategortDto> EditAsync(EditCategortDto model, CancellationToken cancellationToken = default);
+        Task<EditCategoryDto> Edit(EditCategoryDto model, CancellationToken cancellationToken = default);
+        Task<bool> Remove(int id, CancellationToken cancellationToken = default);
     }
 }

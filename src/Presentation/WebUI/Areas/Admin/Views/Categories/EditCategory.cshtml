@@ -1,0 +1,27 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Services.Categories;
+@model EditCategoryDto;
+@{
+    ViewData["Title"] = "Edit category";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between pb-0">
+                    <h6>Edit category</h6>
+                </div>
+                <form method="post" class="card-body p-3 pb-2">
+                    <div class="input-group mb-3">
+                        <input asp-for="Name" type="text" class="form-control" placeholder="New name" value="@Context.Request.QueryString.Value.Substring(6)" aria-describedby="button-addon2">
+                        <input type="submit" class="btn bg-gradient-info font-weight-bold text-xs mb-0" id="button-addon2" value="Edit">
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger"></div> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

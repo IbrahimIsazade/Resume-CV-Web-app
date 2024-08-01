@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Membership;
+﻿    using Domain.Entities.Membership;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -101,7 +101,6 @@ namespace WebUI.Controllers
 
             if (!string.IsNullOrWhiteSpace(callbackUrl))
             {
-                Console.WriteLine($"---==[ CALLBACK: {callbackUrl} ]==---");
                 return Redirect(callbackUrl);
             }
 

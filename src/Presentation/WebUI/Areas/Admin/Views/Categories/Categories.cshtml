@@ -1,0 +1,68 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Services.Categories;
+@model AddCategoryRequestDto;
+
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between pb-0">
+                    <h6>Categories table</h6>
+
+                    <div class="col-md-4">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn bg-gradient-info btn-block mb-3" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">
+                            Add
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Category name</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" asp-action="AddCategory" class="card-body p-3 pb-2">
+                                        <div class="modal-body">
+                                            <input asp-for="Name" type="text" class="form-control" placeholder="Web development" aria-describedby="button-addon2">
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</a>
+                                            <input type="submit" class="btn bg-gradient-info" value="Add">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Name</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Created</th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @await Component.InvokeAsync("AllCategories")
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
