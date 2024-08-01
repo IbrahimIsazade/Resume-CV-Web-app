@@ -42,7 +42,7 @@ namespace WebUI
             });
 
             builder.Services.AddValidatorsFromAssemblyContaining<AddContactPostRequestDtoValidator>(includeInternalTypes: true);
-            builder.Services.AddValidatorsFromAssemblyContaining<AddCategoryRequestDtoValidator>(includeInternalTypes: true);
+            builder.Services.AddValidatorsFromAssemblyContaining<EditCategoryRequestDtoValidator>(includeInternalTypes: true);
 
             //builder.Services.AddHttpContextAccessor();
 

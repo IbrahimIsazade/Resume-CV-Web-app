@@ -48,7 +48,6 @@ namespace WebUI.Areas.Admin.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<IActionResult> RemoveCategory(int id)
         {

@@ -4,7 +4,7 @@ namespace Services.Categories
 {
     public class AddCategoryRequestDtoValidator : AbstractValidator<AddCategoryRequestDto>
     {
-        public AddCategoryRequestDtoValidator()
+        public AddCategoryRequestDtoValidator() 
         {
             RuleFor(m => m.Name)
                 .NotNull()
