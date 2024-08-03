@@ -29,7 +29,7 @@ namespace Persistence.Contexts
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in this.ChangeTracker.Entries<ICreateEntity>())
+            foreach (var entry in ChangeTracker.Entries<ICreateEntity>())
             {
                 if (entry.State == EntityState.Added)
                 {
