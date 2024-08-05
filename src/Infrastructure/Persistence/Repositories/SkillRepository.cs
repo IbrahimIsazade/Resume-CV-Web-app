@@ -5,8 +5,8 @@ using Repositories.common;
 
 namespace Persistence.Repositories
 {
-    public class SkillRepository : AsyncRepository<Skill>, ISkillTypeRepository
+    public class SkillTypeRepository : AsyncRepository<SkillType>, ISkillTypeRepository
     {
-        public SkillRepository(DbContext db) : base(db) { }
+        public SkillTypeRepository(DbContext db) : base(db) { }
     }
 }

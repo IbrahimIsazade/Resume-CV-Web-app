@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Services.Categories;
 using Services.ContactPost;
+using WebUI.Filters;
 
 namespace WebUI
 {
@@ -26,6 +27,7 @@ namespace WebUI
                     .Build();
 
                 cfg.Filters.Add(new AuthorizeFilter(policy));
+                cfg.Filters.Add(new GlobalExceptionFilter());
             });
 
             builder.Services.AddDataContext(cfg =>

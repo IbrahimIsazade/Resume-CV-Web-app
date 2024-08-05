@@ -45,6 +45,7 @@
     <None Include="wwwroot\Account\.sass-cache\7643c8aa2e335ff5e104bc47d8dd7f1a0693bb39\variables.scssc" />
     <None Include="wwwroot\Account\.sass-cache\9dc767a56f3dc2f8a933300255cd2265f13191d4\main.scssc" />
     <None Include="wwwroot\Account\.sass-cache\9dc767a56f3dc2f8a933300255cd2265f13191d4\responsive.scssc" />
+    <None Include="wwwroot\ErrorPages\error.html" />
   </ItemGroup>
 
 </Project>
